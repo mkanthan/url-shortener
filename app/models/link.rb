@@ -1,3 +1,5 @@
+require 'random_string'
+
 class Link < ApplicationRecord
   validates :url, url: true, presence: true
   validates_uniqueness_of :url

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: 'links#index'
 
   resources :links, only: [:index, :create, :show]
+  get ':unique_id', to: 'links#show'
 end

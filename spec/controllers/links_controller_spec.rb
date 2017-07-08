@@ -5,6 +5,22 @@ RSpec.describe LinksController, type: :controller do
   let(:valid_attributes) { { url: "www.macrumors.com" } }
   let(:invalid_attributes) { { url: "asdfasdf" } }
 
+  describe "GET show" do
+    before do
+      @link = Link.create(url: "www.google.com")
+    end
+
+    it "should redirect to the URL of the ID given" do
+      get :show, params: { unique_id: @link.unique_id }
+      expect(response).to redirect_to("http://www.google.com")
+    end
+
+    it "should render the show page if the link doesn't exist" do
+      get :show, params: { unique_id: "jasdfa" }
+      expect(response).to render_template("show")
+    end
+  end
+
   describe "POST create" do
     context "with valid params" do
       it "creates a new link if one doesn't exist in the database already" do
