@@ -26,13 +26,13 @@ RSpec.describe Link, type: :model do
     it "is invalid if the url is not a valid URL" do
       new_record = Link.new(url: "lkasjdfkjl")
       expect(new_record.valid?).to eq(false)
-      expect(new_record.errors.full_messages).to include("Url is an invalid URL")
+      expect(new_record.errors.messages[:url]).to include("This doesn't seem like a valid URL.")
     end
 
     it "is invalid without a url at all" do
       new_record = Link.new
       expect(new_record.valid?).to eq(false)
-      expect(new_record.errors.full_messages).to include("Url can't be blank")
+      expect(new_record.errors.messages[:url]).to include("It seems you didn't enter a URL.")
     end
   end
 
