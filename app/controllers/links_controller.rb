@@ -12,7 +12,11 @@ class LinksController < ApplicationController
   def create
     @link = Link.find_by_url(link_params[:url]) ||
     Link.create(link_params)
-    respond_with(@link)
+    if (@link.valid?)
+      render json: { url: "#{request.base_url}/#{@link.unique_id}" }
+    else
+      respond_with(@link)
+    end
   end
 
   private

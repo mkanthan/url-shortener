@@ -29,10 +29,10 @@ RSpec.describe LinksController, type: :controller do
         }.to change(Link, :count).by(1)
       end
 
-      it "responds with the last link" do
+      it "responds with the URL of the last link" do
         post :create, params: { link: valid_attributes, format: 'json' }
         response_json = JSON.parse(response.body)
-        expected_json = JSON.parse(Link.last.to_json)
+        expected_json = { "url" => "#{request.base_url}/#{Link.last.unique_id}" }
         expect(response_json).to eq(expected_json)
       end
     end
