@@ -1,4 +1,5 @@
 class Link < ApplicationRecord
+  validates :url, url: true, presence: true
   validates_uniqueness_of :url
   validates_uniqueness_of :unique_id
 
