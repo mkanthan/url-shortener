@@ -6,7 +6,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find_by_unique_id(params[:unique_id])
-    redirect_to "http://#{@link.url}" if @link
+    redirect_to @link.url if @link
   end
 
   def create

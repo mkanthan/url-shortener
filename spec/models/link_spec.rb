@@ -36,4 +36,19 @@ RSpec.describe Link, type: :model do
     end
   end
 
+  describe "creating a URL" do
+    it "should add the protocol if there is no protocol" do
+      new_record = Link.create(url: "www.google.com")
+      expect(new_record.url).to eq("http://www.google.com")
+    end
+
+    it "shouldn't do anything if there is already a HTTP or HTTPS protocol added" do
+      new_record = Link.create(url: "https://www.google.com")
+      expect(new_record.url).to eq("https://www.google.com")
+
+      new_record = Link.create(url: "http://www.google.com")
+      expect(new_record.url).to eq("http://www.google.com")
+    end
+  end
+
 end

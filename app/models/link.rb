@@ -6,9 +6,17 @@ class Link < ApplicationRecord
   validates_uniqueness_of :url
   validates_uniqueness_of :unique_id
 
+  before_validation :add_url_protocol
   before_create :set_unique_id
 
   def set_unique_id
     self.unique_id ||= RandomString.generate(7)
+  end
+
+  def add_url_protocol
+    return unless self.url
+    unless self.url[/\Ahttp:\/\//] || self.url[/\Ahttps:\/\//]
+      self.url = "http://#{self.url}"
+    end
   end
 end
