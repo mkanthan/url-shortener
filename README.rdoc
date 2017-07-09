@@ -1,0 +1,65 @@
+= \Url.ly Link Shortener
+
+== Description
+
+This app is a simple interface to shorten a URL. It is built in Ruby on Rails and features a heavy server with a simple JavaScript client.
+
+== Project Setup
+
+I personally use {rbenv}[https://github.com/rbenv/rbenv] along with {rbenv-gemset}[https://github.com/jf/rbenv-gemset] (optional, but easier to deal with since I'm running multiple projects), hence the +.ruby-version+ and +.rbenv-gemsets+ files. If these cause problems for you, I suggest removing them.
+
+1) This app was bundled with Ruby 2.4.0, so ensure it is installed on your machine.
+
+2) Run your standard bundle commands
+
+  $ gem install bundler
+  $ bundle
+  $ rbenv rehash
+
+3) Set up the database
+
+  $ bundle exec rake db:setup
+
+If you choose to run the setup commands separately, such as:
+
+  $ bundle exec rake db:create
+  $ bundle exec rake db:migrate
+  $ bundle exec rake db:test:prepare
+
+4) Run the test suite:
+
+  $ bundle exec rake
+
+The tests were written in RSpec and they should pass 100%, at the time of this writing.
+
+5) Run the server on the default port of 3000
+
+  $ bundle exec rails s
+
+Upon hitting http://localhost:3000, you should be presented with the interface to shorten a URL.
+
+== Approach
+
+I started with the back-end first and built from the "bottom-up". I put the Link model in place first, and created the basic design of a unique identifier that identifies the URL that's been shortened. I opted to use a custom generator for the unique identifier since a class such as +SecureRandom+ may add non-alphanumeric characters. Unit tests are written for this as well.
+
+I made sure the heavy-lifting is done by the server, and strict unit tests are written around the single Link model and controller. I put the endpoints in place first before moving on to the front-end. Unit tests around the validations, and redirects ensure the server drives the client.
+
+The server won't allow duplicate records (unless they are 2 different protocols such as HTTP vs HTTPS). This optimizes database storage a bit for simple cases where you just want a domain name shortened. I noted that this is also how Bit.ly works.
+
+Moving on to the front-end, a single AJAX request is all that's required. One class is capable of encompassing the work of submitting the form and displaying the validations or successful URL generation.
+
+== Functionality
+
+1) Shorten a URL: visit http://localhost:3000 on your local machine. Paste a link from another browser window, such as https://www.apple.com. Hit the "SHORTEN" button and your link as well as a "COPY" button appear. Hitting the COPY button will copy the link to the clipboard and you're able to paste this into another browser window.
+
+1a) Entering a url manually without the protocol will work too: "www.google.com".
+
+2) Validations: The site will prevent you from entering garbage into the box: "asdfasdf", or leaving the box empty. The appropriate message will appear.
+
+3) A URL that has already been shortened will show the previously created link instead of generating a new one.
+
+== Known Flaws & Alternatives
+
+1) Unit tests in JavaScript: I opted not to add the heavy weight framework such as Jasmine and increase the test suite time. However, since the JavaScript code is fairly light I'll opt to put this in a future release.
+
+2) HTTP vs HTTPS vs No protocol: A URL entered with no protocol is assumed to have a HTTP protocol. This may backfire if there is no redirect on that site from HTTP to HTTPS. It's on the user to determine whether the links function before entering them into the system. The system simply takes care of making sure they are a valid URL format (with or without the protocol). The alternative is force the user to enter the protocol, however, this would be at the expense of user-experience so it's allowed for now.
