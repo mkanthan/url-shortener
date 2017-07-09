@@ -30,9 +30,13 @@ RSpec.describe Link, type: :model do
     end
 
     it "is invalid without a url at all" do
-      new_record = Link.new
-      expect(new_record.valid?).to eq(false)
-      expect(new_record.errors.messages[:url]).to include("It seems you didn't enter a URL.")
+      nil_url_record = Link.new
+      expect(nil_url_record.valid?).to eq(false)
+      expect(nil_url_record.errors.messages[:url]).to include("It seems you didn't enter a URL.")
+
+      empty_url_record = Link.new(url: "")
+      expect(empty_url_record.valid?).to eq(false)
+      expect(empty_url_record.errors.messages[:url]).to include("It seems you didn't enter a URL.")
     end
   end
 

@@ -2,7 +2,7 @@ require 'random_string'
 
 class Link < ApplicationRecord
   validates :url, url: { message: "This doesn't seem like a valid URL." }, allow_blank: true
-  validates_presence_of :url, message: "It seems you didn't enter a URL."
+  validates_presence_of :url, message: "It seems you didn't enter a URL.", allow_blank: false
   validates_uniqueness_of :url
   validates_uniqueness_of :unique_id
 
@@ -14,7 +14,7 @@ class Link < ApplicationRecord
   end
 
   def add_url_protocol
-    return unless self.url
+    return if self.url.blank?
     unless self.url[/\Ahttp:\/\//] || self.url[/\Ahttps:\/\//]
       self.url = "http://#{self.url}"
     end
