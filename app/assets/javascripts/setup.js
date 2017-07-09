@@ -1,0 +1,3 @@
+$(function() {
+  CreateLink.setup();
+});

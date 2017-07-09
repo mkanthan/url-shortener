@@ -1,4 +1,12 @@
 var CreateLink = {
+  setup: function() {
+    var _self = this;
+    $('#shorten-form').submit(function(e) {
+      e.preventDefault();
+      _self.submit();
+    });
+  },
+
   submit: function() {
     var url = $("input").val();
 
