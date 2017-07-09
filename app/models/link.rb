@@ -19,4 +19,10 @@ class Link < ApplicationRecord
       self.url = "http://#{self.url}"
     end
   end
+
+  def self.find_by_url(url)
+    self.find_by('url = :url', { url: url }) ||
+    self.find_by('url = :url', { url: "http://#{url}" }) ||
+    self.find_by('url = :url', { url: "https://#{url}" })
+  end
 end

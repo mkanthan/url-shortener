@@ -51,4 +51,20 @@ RSpec.describe Link, type: :model do
     end
   end
 
+  describe "find_by_url" do
+    it "should search for entries that have a HTTP or HTTPS protocol in addition to the original url" do
+      google = Link.create(url: "www.google.com")
+      apple = Link.create(url: "http://www.apple.com")
+      facebook = Link.create(url: "https://www.facebook.com")
+
+      expect(Link.find_by_url("www.google.com")).not_to be_nil
+      expect(Link.find_by_url("www.apple.com")).not_to be_nil
+      expect(Link.find_by_url("www.facebook.com")).not_to be_nil
+
+      expect(Link.find_by_url("www.google.com").url).to eq("http://www.google.com")
+      expect(Link.find_by_url("www.apple.com").url).to eq("http://www.apple.com")
+      expect(Link.find_by_url("www.facebook.com").url).to eq("https://www.facebook.com")
+    end
+  end
+
 end
