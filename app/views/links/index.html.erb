@@ -1,4 +1,11 @@
-<input type="text" />
-<button class='submit-url' onclick="CreateLink.submit()">Shorten</button>
-<p class='shortened-url'></p>
-<p class='error'></p>
+<div id='form-container'>
+  <input type="text" id="url-box" />
+  <button class='submit-url' onclick="CreateLink.submit()">Shorten</button>
+</div>
+<div id='short-url-content' style='display:none;'>
+  <p class='shortened-url'></p>
+  <button onclick="CreateLink.copy()">Copy</button>
+</div>
+<div id='error-content' style='display:none;'>
+  <p class='error'></p>
+</div>
