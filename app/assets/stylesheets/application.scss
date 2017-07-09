@@ -1,0 +1,97 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+body {
+  font-family: "proxima-nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #444;
+  margin: 0;
+  .main-content,
+  .header-inner {
+    max-width: 1224px;
+    margin: 0 auto;
+  }
+  .header-inner {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h1 {
+      margin: 0px auto;
+      width: 100%;
+      font-size: 3em;
+    }
+  }
+  header {
+    color: white;
+  }
+}
+
+header {
+  background-color: #395563;
+}
+
+.main-content {
+  font-size: 24px;
+  input, p {
+    display: inline-block;
+    margin: 0px;
+    padding: 1em;
+    width: 60%;
+  }
+  p {
+    font-weight: bold;
+    color: #ee6123;
+  }
+  input:focus,
+  button:focus {
+    outline: none;
+  }
+  #shorten-form {
+    input {
+      font-size: 24px;
+      border-radius: 15px;
+      border: 1px solid #dddddd;
+      color: #7f898e;
+    }
+  }
+  button {
+    background: #ee6123;
+    border: none;
+    color: white;
+    font-size: 24px;
+    padding: 1em;
+    border-radius: 15px;
+  }
+  button:active {
+    background: #ed8a5e;
+  }
+  #form-content,
+  #error-content,
+  #short-url-content {
+    padding-top: 1em;
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+  }
+  #short-url-content {
+    p {
+      text-align: left;
+    }
+    button {
+      margin: 0px 20px;
+    }
+  }
+}

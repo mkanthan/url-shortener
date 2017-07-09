@@ -1,10 +1,13 @@
 <form id='shorten-form'>
-  <input type="text" id="url-box" />
-  <button class='submit-url' type="submit">Shorten</button>
+  <div id='form-content'>
+    <h2>Shorten your links with Url.ly</h2>
+    <input type="text" id="url-box" autocomplete="off" placeholder="Paste a link or enter a URL to shorten it."/>
+    <button class='submit-url' type="submit">SHORTEN</button>
+  </div>
 </form>
 <div id='short-url-content' style='display:none;'>
   <p class='shortened-url'></p>
-  <button onclick="CreateLink.copy()">Copy</button>
+  <button onclick="CreateLink.copy()">COPY</button>
 </div>
 <div id='error-content' style='display:none;'>
   <p class='error'></p>

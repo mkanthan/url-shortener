@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>UrlShortener</title>
+    <title>Url.ly</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="header-inner">
+        <h1>Url.ly</h1>
+      </div>
+    </header>
+    <div class="main-content">
+      <%= yield %>
+    </div>
   </body>
 </html>
